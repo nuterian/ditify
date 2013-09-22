@@ -4,8 +4,18 @@ var ditify = function(options){
 	this.attribs = options.attribs || []
 	this.label = options.label || options.attribs[options.attribs.length-1] 
 	this.data = []
+	this.data_info = []
+	this.trees = []
 
-	function count_distinct_values(table, attrib)
+	this.Node = function(){
+	    this.label = "";
+	    this.attribute = "";
+	    this.isLeaf = true;
+	    this.chance = 1;
+	    this.children = []
+	}
+
+	this.count_distinct_values = function(table, attrib)
 	{
 	    var distinct = {};
 	    for(var i=0; i<table.length; i++){
@@ -47,6 +57,72 @@ var ditify = function(options){
 	    }
 
 	    return min_entropy_attrib;
+	}
+
+	this.count_frequent_values = function(table, attrib)
+	{
+	    var distinct_values = count_distinct_values(table, attrib);
+	    var max_frequency = -1, max_value = "", entropy = 0;
+
+	    for(value in distinct_values){
+	        if (distinct_values[value] > max_frequency){
+				max_frequency = distinct_values[value];
+	            max_value = value;
+	        }
+	        entropy -= (distinct_values[value]/table.length) * Math.log(distinct_values[value]/table.length)/Math.log(2);
+	    }
+	    return {value: max_value, chance: max_frequency/table.length, entropy: entropy, distinct_count: Object.keys(distinct).length};
+	}
+
+	this.is_homogeneous = function(table, label_attrib)
+	{
+	    var start_value = table[0][label_attrib];
+	    for(var i = 1; i < table.length; i++){
+	        if(start_value != table[i][label_attrib])
+	            return false;
+	    }
+	    return true;		
+	}
+
+
+	this.generate_tree = function(node, table, default_label)
+	{
+	    var tree = {leaves:0, entropy:0};
+
+	    if(table.length < 1 || Object.keys(table[0]).length == 1){
+
+	        node.attribute = default_label.value;
+	        node.chance = default_label.chance;
+
+	        return { leaves: default_label.distinct_count, entropy: default_label.entropy };
+	    }
+	    else if(is_homogeneous(table, this.label)){
+
+	        node.attribute = table[0][this.label];
+	        return { leaves: 1, entropy: 0 };        
+	    }
+	    else
+	    {
+	        var split_attrib = get_split_attrib(table);
+	        node.attribute = split_attrib;
+	        node.isLeaf = false;
+
+	        for(value in this.data_info[split_attrib]){
+	            var child_node = new Node();
+
+	            child_node.label = value;
+	            node.children.push(child_node);
+
+	            var child_default_label = count_frequent_values(table, this.label);
+	            var child_table = this.prune(table, split_attrib, value);
+	            var child_tree = 
+	            	generate_tree(child_node, child_table, child_default_label);
+
+	            tree.entropy += child_tree.entropy;
+	            tree.leaves += child_tree.leaves;
+	        }            
+	    }
+	    return tree;
 	}
 }
 
