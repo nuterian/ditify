@@ -1,6 +1,3 @@
-ditify
-======
-
 `ditify` is a simple decision tree (ID3) based classification library written in JavaScript.
 
 ```javascript
@@ -19,11 +16,14 @@ classifier.train([ "dinner",     "cold",   "medium",     "dominos" ]);
 classifier.classify([ "lunch", "rainy", "medium", "" ]); // {label: percy's, chance: 1}
 ```
 
-##options
+options
+---
 The constructor `ditify()` accepts an options hash whose properties can be defined as follows:
 
-###attribs
+attribs
+---
 The attribs property takes an array of strings containing all possible attribute names in the training data.
 
-###label
+label
+---
 The label property takes a string denotes the name of the attribute used for classification. If nothing is specified, the last string in the `attribs` array is set as the class attribute.
