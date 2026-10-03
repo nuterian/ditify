@@ -40,7 +40,7 @@ lunch.classify(['', 'cold', 'medium', 'dominos']).label
   Small leaves lean on their ancestors (hierarchical shrinkage, ICML 2022).
 - 🔢 **Numbers and gaps are fine.** Numeric columns split on thresholds
   (`age <= 31.5`). Missing or never-seen values are averaged across branches
-  rather than crashing.
+  rather than crashing. ID-like columns (every value different) are ignored.
 - 🌲 **Swap in a forest** when you care more about accuracy than reading the
   tree: `new Forest(...)` has the same API.
 - ⚡ **Quick.** On 10,000 rows, a tree trains in about 0.2 s and answers in

@@ -119,6 +119,15 @@ function encodeValue(f, v) {
   return c === undefined ? -2 : c
 }
 
+// A categorical column whose values are all different (an ID, a name) can only
+// memorise rows, never generalise, so it is not used for splitting.
+function isIdLike(f) {
+  if (f.numeric) return false
+  let known = 0
+  for (const c of f.codes) if (c >= 0) known++
+  return known >= 5 && f.cats.length === known
+}
+
 function buildProblem(rows, attributes, t, numeric) {
   const features = attributes.map((name, j) =>
     j === t ? null : encodeColumn(rows, j, numeric.includes(name))
@@ -128,7 +137,7 @@ function buildProblem(rows, attributes, t, numeric) {
     attributes,
     target: t,
     features,
-    candidates: features.filter(Boolean),
+    candidates: features.filter((f) => f && !isIdLike(f)),
     y: y.codes,
     classes: y.cats,
     K: y.cats.length,

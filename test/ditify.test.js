@@ -93,6 +93,13 @@ test('missing and unseen values are averaged over branches', () => {
   assert.match(c.explain(['snow', 'cool', 'normal', 'weak']).because, /outlook unknown/)
 })
 
+test('ignores ID-like columns', () => {
+  const rows = [['ann', 'pizza', 'yes'], ['bob', 'soup', 'no'], ['cat', 'pizza', 'yes'], ['dan', 'soup', 'no'], ['eve', null, 'yes'], ['fay', 'pizza', 'yes']]
+  const c = new Ditify({ attributes: ['name', 'food', 'ok'] }).train(rows)
+  assert.equal(c.tree().attribute, 'food')
+  assert.equal(c.importance().name, 0)
+})
+
 test('learns XOR through a zero-gain first split', () => {
   const rows = []
   for (const a of ['0', '1']) for (const b of ['0', '1']) for (let k = 0; k < 3; k++) rows.push([a, b, a === b ? 'same' : 'diff'])
