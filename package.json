@@ -1,6 +1,6 @@
 {
   "name": "ditify",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "Tiny, dependency-free decision tree and random forest classifier for JavaScript",
   "type": "module",
   "main": "./ditify.js",

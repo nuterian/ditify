@@ -31,8 +31,8 @@ test('learns the textbook ID3 tree regardless of column order', () => {
   )
 })
 
-test('v1 README example: blank value marks the attribute to predict', () => {
-  const c = new Ditify({ attribs: ['meal', 'weather', 'speed', 'restaurant'] })
+test('README example: blank value marks the attribute to predict', () => {
+  const c = new Ditify({ attributes: ['meal', 'weather', 'speed', 'restaurant'] })
   c.train(['breakfast', 'hot', 'quick', 'subway'])
   c.train(['lunch', 'hot', 'medium', "moumon's"])
   c.train(['lunch', 'rainy', 'leisurely', "percy's"])

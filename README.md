@@ -85,7 +85,6 @@ new Forest({ ...same, trees: 100, maxFeatures: 'sqrt', seed: 1 })
 
 | | categorical (MONK-1) | numeric (circle) |
 |---|---|---|
-| ditify v1 (2013) | 69.8% | n/a |
 | plain ID3 | 84.7%, log loss 4.68 | 88.1%, log loss 1.20 |
 | **ditify tree** | **85.0%, log loss 0.48** | **88.1%, log loss 0.39** |
 | **ditify forest** | **89.8%, log loss 0.40** | **89.9%, log loss 0.31** |
@@ -98,12 +97,6 @@ other words, the probabilities become believable.
 [**DecisionTree**](https://github.com/nuterian/DecisionTree) is a no-build web
 UI. Paste a CSV, then browse the tree, rules and column importance, and ask it
 questions.
-
-## Upgrading from v1
-
-v1 was a browser global. It also had an entropy typo that made it always split
-on the first column. The v1 options (`attribs`, `label`), `train(row)` and
-blank-value `classify` all still work.
 
 ## What's next
 
