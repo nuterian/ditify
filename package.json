@@ -1,0 +1,28 @@
+{
+  "name": "ditify",
+  "version": "2.0.0",
+  "description": "Tiny, dependency-free decision tree and random forest classifier for JavaScript",
+  "type": "module",
+  "main": "./ditify.js",
+  "exports": {
+    ".": "./ditify.js"
+  },
+  "files": [
+    "ditify.js"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "bench": "node bench/bench.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "decision-tree",
+    "random-forest",
+    "classification",
+    "id3",
+    "c4.5",
+    "machine-learning"
+  ]
+}
