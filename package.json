@@ -8,7 +8,9 @@
     ".": "./ditify.js"
   },
   "files": [
-    "ditify.js"
+    "ditify.js",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "test": "node --test",
@@ -24,5 +26,11 @@
     "id3",
     "c4.5",
     "machine-learning"
-  ]
+  ],
+  "license": "MIT",
+  "author": "Jugal Manjeshwar",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nuterian/ditify.git"
+  }
 }
