@@ -94,9 +94,10 @@ other words, the probabilities become believable.
 
 ## See it
 
-[**DecisionTree**](https://github.com/nuterian/DecisionTree) is a no-build web
-UI. Paste a CSV, then browse the tree, rules and column importance, and ask it
-questions.
+**[Try the playground →](http://nuterian.github.io/DecisionTree)**
+It has 1,000-row datasets, a live tree you can click, knobs that retrain as you
+drag, and a 100-tree forest trained in your browser.
+([source](https://github.com/nuterian/DecisionTree))
 
 ## What's next
 
